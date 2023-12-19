@@ -1736,6 +1736,16 @@ func (gs *GossipSubRouter) emitGossip(topic string, exclude map[peer.ID]struct{}
 		}
 	}
 
+	if len(peers) < gs.params.Dlo {
+		for p := range gs.p.topics[topic] {
+			if gs.feature(GossipSubFeatureMesh, gs.peers[p]) {
+				peers = append(peers, p)
+			}
+			if len(peers) >= gs.params.Dlo {
+				break
+			}
+		}
+	}
 	target := gs.params.Dlazy
 	factor := int(gs.params.GossipFactor * float64(len(peers)))
 	if factor > target {
