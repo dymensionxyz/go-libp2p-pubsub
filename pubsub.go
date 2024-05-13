@@ -29,7 +29,7 @@ const DefaultMaxMessageSize = 1 << 20
 var (
 	// TimeCacheDuration specifies how long a message ID will be remembered as seen.
 	// Use WithSeenMessagesTTL to configure this per pubsub instance, instead of overriding the global default.
-	TimeCacheDuration = 120 * time.Second
+	TimeCacheDuration = 120 * time.Hour
 
 	// TimeCacheStrategy specifies which type of lookup/cleanup strategy is used by the seen messages cache.
 	// Use WithSeenMessagesStrategy to configure this per pubsub instance, instead of overriding the global default.

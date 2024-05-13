@@ -660,7 +660,8 @@ func (gs *GossipSubRouter) handleIHave(p peer.ID, ctl *pb.ControlMessage) []*pb.
 		}
 
 		for _, mid := range ihave.GetMessageIDs() {
-			if gs.p.seenMessage(mid) {
+			_, found := gs.mcache.Get(mid)
+			if found {
 				continue
 			}
 			iwant[mid] = struct{}{}
